@@ -1,0 +1,26 @@
+- hosts: db
+  remote_user: root
+  tasks:
+    - name: gives you a key which gives you access to the repository
+      shell: wget -qO - https://www.mongodb.org/static/pgp/server-3.2.asc | sudo apt-key add -
+
+    - name: gets the sources
+      shell: echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+
+    - name: upgrade any packages available
+      shell: sudo apt-get update
+
+    - name: installs specific mongodb package
+      shell: sudo apt-get install -y mongodb-org=3.2.20
+
+    - name: removes the existing mongod.conf file etc is a directory in the virtual machine
+      shell: sudo rm /etc/mongod.conf
+
+    - name: linking the connection between the file, crating synced file between mongod.conf and /etc/mongod.conf
+      shell: sudo ln -s /home/ubuntu/environment/mongod.conf /etc/mongod.confsudo ln -s /home/ubuntu/environment/mongod.conf /etc/mongod.conf
+
+    - name: restarting so the new configuration is in place
+      shell: sudo systemctl restart mongod
+
+    - name: enabling mongod
+      shell: sudo systemctl enable mongod
