@@ -40,7 +40,7 @@ Vagrant.configure("2") do |config|
 
     # run a shell script and path is where it is run
     # app.vm.provision "shell", path: "environment/app/provision.sh", privileged: false
-    # app.vm.provision "shell", inline: set_env({DB_HOST: "mongodb://192.168.10.150:27017/posts"}), privileged: false
+    app.vm.provision "shell", inline: set_env({DB_HOST: "mongodb://192.168.10.150:27017/posts"}), privileged: false
 
     # Run Ansible from the Vagrant VM using local
     app.vm.provision "ansible_local" do |ansible|
