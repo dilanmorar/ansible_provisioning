@@ -3,7 +3,7 @@
 
   # installing nginx
   tasks:
-    - name: updatethe sources list
+    - name: update the sources list
       shell: sudo apt-get update -y
 
     - name: upgrade any packages available
